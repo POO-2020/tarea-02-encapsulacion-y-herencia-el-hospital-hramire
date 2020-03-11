@@ -1,4 +1,4 @@
-// debe resibir los parametros mediante un objeto
+// debe recibir los parametros mediante un objeto
 export default class Paciente{
     constructor({nombre,fechaDeNacimiento,telefono}){
         super()
