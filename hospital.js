@@ -1,44 +1,106 @@
 //El constructor debe recibir los parámetros mediante un objeto
-export default class Hospital {
-    constructor(nombre,direccion){
+export default class Hospital{
+
+    constructor({nombre, direccion})
+    {
         this._nombre = nombre
         this._direccion = direccion
-        this._doctores = []
-        this._citas = [] 
+        this._doctores = new Array()
+        this._citas = new Array()
     }
-    
-    registrarDoctor(pepe){
-        this._doctores.push(pepe)
-    }
-    buscarDoctor(){
 
+    registrarDoctor(doctor)
+    {
+        let found = this.buscarDoctor(doctor)
+      
+        if(found == null){this._doctores.push(doctor);
+            return true}
+        else
+        {return false}
+        
     }
-    eliminarDoctor(){
 
-    }
-    actualizarDoctor(){
 
+    buscarDoctor(doctor)
+    {
+            let buscar = this._doctores.find(doc => doc._esIgualA(doctor))
+            if(buscar == undefined){return null}
+            else {return buscar}
+        
     }
-    listarDoctor(){
-        this._doctores.forEach( (doc,i)=>{
-            console.log(`${i+1},${doc.getPerfil()}`)
+    eliminarDoctor(doctor){
+        let found =  this.buscarDoctor(doctor)
+        if(found == null) return false
+        else {
+        let i = this._doctores.indexOf(found)
+        this._doctores.splice(i,1)
+        return true
+        }
+    }
+    modificarDoctor(doctor, nuevoDoctor){
+        let found =  this.buscarDoctor(doctor)
+        if(found == null) return false
+        else {
+        let i = this._doctores.indexOf(found)
+        this._doctores[i] = nuevoDoctor
+        return true
+        }
+    }
+
+
+    listarDoctores()
+    {
+        console.log("DOCTORES")
+        this._doctores.forEach( (doct, i) => {
+            console.log(`(${i+1}) ${doct.getPerfil()}`)
         })
     }
-    registrarCita(x){
-        this._citas.push(x)
-    }
-    buscarCita(){
 
+    registrarCita(cita)
+    {
+        let found = this.buscarCita(cita)
+      
+        if(found == null){this._citas.push(cita);
+            return true}
+        else
+        {return false}
+        
     }
-    eliminarCita(){
 
-    }
-    actualizarCita(){
 
+    buscarCita(cita)
+    {
+            let buscar = this._citas.find(cit => cit._esIgualA(cita))
+            if(buscar == undefined){return null}
+            else {return buscar}
+        
     }
-    listarCita(){
-        this._citas.forEach( (y,i)=>{
-            console.log(`${i+1},${y.getCita()}`)
+    eliminarCita(cita){
+        let found =  this.buscarCita(cita)
+        if(found == null) return false
+        else {
+        let i = this._citas.indexOf(found)
+        this._citas.splice(i,1)
+        return true
+        }
+    }
+    modificarCita(cita, nuevaCita){
+        let found =  this.buscarCita(cita)
+        if(found == null) return false
+        else {
+        let i = this._citas.indexOf(found)
+        this._citas[i] = nuevaCita
+        return true
+        }
+    }
+
+
+
+    listarCitas()
+    {
+        console.log("CITAS")
+        this._citas.forEach( (cita, i) => {
+            console.log(`(${i+1}) ${cita.getCita()}`)
         })
     }
 }
